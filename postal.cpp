@@ -86,6 +86,7 @@ int main() {
             apartmentNumberAsInt = stoi(apartmentNumber);
         }
         streetNumberAsInt = stoi(streetNumber);
+        // calls function
         properAddress = address(fullName, streetNumber, streetName, city,
                                 province, postalCode, apartmentNumber);
         std::cout << properAddress << std::endl;
