@@ -21,18 +21,27 @@ std::string address(std::string fullName,
     // this function returns the address properly formatted
     std::string formatted;
 
+    // Makes uppercase
+    std::for_each(fullName.begin(),
+                  fullName.end(), [](char& c) { c = ::toupper(c); });
+    std::for_each(streetName.begin(),
+                  streetName.end(), [](char& c) { c = ::toupper(c); });
+    std::for_each(city.begin(),
+                  city.end(), [](char& c) { c = ::toupper(c); });
+    std::for_each(province.begin(),
+                  province.end(), [](char& c) { c = ::toupper(c); });
+    std::for_each(postalCode.begin(),
+                  postalCode.end(), [](char& c) { c = ::toupper(c); });
+
     formatted = fullName + "\n";
     formatted = formatted + streetNumber;
-    if (apartmentNumber != "") {
+    if (std::string(apartmentNumber) != "") {
         formatted = formatted + "-" + apartmentNumber;
     }
     formatted = formatted + " " + streetName + "\n";
     formatted = formatted + city + " ";
     formatted = formatted + province + "  ";
     formatted = formatted + postalCode;
-
-    std::for_each(formatted.begin(),
-                  formatted.end(), [](char& c) { c = ::toupper(c); });
 
     return formatted;
 }
@@ -48,6 +57,8 @@ int main() {
     std::string postalCode;
     std::string properAddress;
     std::string apartmentNumber = "";
+    int apartmentNumberAsInt = 0;
+    int streetNumberAsInt = 0;
 
     // input
     std::cout << "Enter your full name: ";
@@ -71,10 +82,10 @@ int main() {
     std::cout << "" << std::endl;
 
     try {
-        if (apartmentNumber != "") {
-            apartmentNumber = stoi(apartmentNumber);
+        if (apartmentNumber == "y") {
+            apartmentNumberAsInt = stoi(apartmentNumber);
         }
-        streetNumber = stoi(streetNumber);
+        streetNumberAsInt = stoi(streetNumber);
         properAddress = address(fullName, streetNumber, streetName, city,
                                 province, postalCode, apartmentNumber);
         std::cout << properAddress << std::endl;
